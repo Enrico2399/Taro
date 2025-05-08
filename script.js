@@ -77,7 +77,7 @@ const cards = [
     "description": "Suggerisce un periodo di solitudine e ricerca interiore. Potresti dover fare una pausa dal mondo esterno per trovare risposte o percorri la tua strada personale.",
     "description1": "La sfida potrebbe essere quella di affrontare la solitudine e l'isolamento interiore per trovare risposte e chiarezza nelle proprie riflessioni e meditazioni.",
     "description2": "L'azione consigliata potrebbe essere quella di ritirarti in solitudine per riflettere e meditare sulle tue azioni e le tue scelte, cercando la saggezza interiore e la guida spirituale.",
-    "description3": "L'esito potrebbe portare a una maggiore saggezza e consapevolezza. Hai trovato risposte dentro di te e sei pronto per un nuovo inizio basato sulla tua comprensione interiore.",
+    "description3": "L'esito potrebbe portare a una maggiore consapevolezza e intuizione. Hai trovato risposte dentro di te e sei pronto per un nuovo inizio basato sulla tua comprensione interiore.",
     "image": "img/Eremita9.jpeg"
   },
   {
@@ -297,14 +297,14 @@ const createCardElement = (cardData, index) => {
 
 // --- Dynamic Text Color (JavaScript) ---
 
+// Modificato: Colori per l'animazione (solo tonalità di azzurro e giallo)
 const rainbowColors = [
-    'rgb(255, 0, 0)',   // Red
-    'rgb(255, 165, 0)', // Orange
-    'rgb(255, 255, 0)', // Yellow
-    'rgb(0, 128, 0)',   // Green
-    'rgb(0, 0, 255)',   // Blue
-    'rgb(75, 0, 130)',  // Indigo
-    'rgb(148, 0, 211)'  // Violet
+    'rgb(0, 191, 255)', // Deep Sky Blue
+    'rgb(0, 255, 255)', // Cyan
+    'rgb(173, 216, 230)', // Light Blue
+    'rgb(255, 255, 0)',   // Yellow
+    'rgb(255, 215, 0)', // Gold
+    'rgb(255, 165, 0)'  // Orange (tendente al giallo)
 ];
 let colorIndex = 0; // Per tenere traccia del colore corrente
 
