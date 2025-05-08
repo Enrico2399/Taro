@@ -1,101 +1,118 @@
-/* Custom styles for card flip animation and modal */
+/* Stili personalizzati per l'animazione di rotazione delle carte e il modale */
 .card-container {
-    width: 45vw; /* Responsive width */
-    max-width: 200px; /* Max width for larger screens */
-    aspect-ratio: 1 / 1.4; /* Maintain aspect ratio */
-    margin: 0.75rem; /* Tailwind m-3 equivalent */
+    width: 45vw; /* Larghezza responsive */
+    max-width: 200px; /* Larghezza massima per schermi più grandi */
+    aspect-ratio: 1 / 1.4; /* Mantieni il rapporto d'aspetto */
+    margin: 0.75rem; /* Equivalente a m-3 di Tailwind */
     position: relative;
-    perspective: 1000px; /* For 3D flip effect */
+    perspective: 1000px; /* Per l'effetto di rotazione 3D */
 }
 
 .card {
     width: 100%;
     height: 100%;
     position: absolute;
-    transition: transform 0.6s; /* Flip animation duration */
-    transform-style: preserve-3d; /* Preserve 3D space for children */
-    backface-visibility: hidden; /* Hide the back face during flip */
-    border-radius: 0.375rem; /* Tailwind rounded-md equivalent */
-    border: 1px solid #ccc; /* Border */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Simple shadow */
+    transition: transform 0.6s; /* Durata dell'animazione di rotazione */
+    transform-style: preserve-3d; /* Preserva lo spazio 3D per gli elementi figli */
+    backface-visibility: hidden; /* Nascondi la faccia posteriore durante la rotazione */
+    border-radius: 0.375rem; /* Equivalente a rounded-md di Tailwind */
+    border: 1px solid #ccc; /* Bordo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra semplice */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.5rem; /* Tailwind p-2 equivalent */
-    box-sizing: border-box; /* Include padding in element's total width and height */
+    padding: 0.5rem; /* Equivalente a p-2 di Tailwind */
+    box-sizing: border-box; /* Includi il padding nella larghezza e altezza totali dell'elemento */
 }
 
 .card-front {
     background-color: white;
-    transform: rotateY(0deg); /* Front initially visible */
-    z-index: 2; /* Ensure front is above back initially */
+    transform: rotateY(0deg); /* Il fronte è inizialmente visibile */
+    z-index: 2; /* Assicura che il fronte sia inizialmente sopra il retro */
 }
 
 .card-back {
-    background-color: #eee; /* Placeholder background */
-    transform: rotateY(180deg); /* Back initially hidden */
-    z-index: 1; /* Ensure back is below front initially */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    background-size: cover; /* Cover the element */
-    background-position: center; /* Center the background image */
+    background-color: #eee; /* Sfondo placeholder */
+    transform: rotateY(180deg); /* Il retro è inizialmente nascosto */
+    z-index: 1; /* Assicura che il retro sia inizialmente sotto il fronte */
+    justify-content: center; /* Centra il contenuto verticalmente */
+    align-items: center; /* Centra il contenuto orizzontalmente */
+    background-size: cover; /* Copri l'elemento */
+    background-position: center; /* Centra l'immagine di sfondo */
+    /* Aggiungi un po' di padding per evitare che il testo tocchi i bordi */
+    padding: 1rem;
 }
 
-/* Class added when card is flipped */
+/* Classe aggiunta quando la carta viene ruotata */
 .card-container.flipped .card-front {
     transform: rotateY(180deg);
 }
 
 .card-container.flipped .card-back {
-    transform: rotateY(360deg); /* Rotate back to face forward */
+    transform: rotateY(360deg); /* Ruota il retro per farlo affrontare in avanti */
 }
 
 .card-image {
-    width: 6rem; /* Tailwind w-24 equivalent */
-    height: 6rem; /* Tailwind h-24 equivalent */
-    object-fit: cover; /* Ensure image covers the area */
-    margin-bottom: 0.5rem; /* Tailwind mb-2 equivalent */
-    border-radius: 0.25rem; /* Slightly rounded corners */
+    width: 6rem; /* Equivalente a w-24 di Tailwind */
+    height: 6rem; /* Equivalente a h-24 di Tailwind */
+    object-fit: cover; /* Assicura che l'immagine copra l'area */
+    margin-bottom: 0.5rem; /* Equivalente a mb-2 di Tailwind */
+    border-radius: 0.25rem; /* Angoli leggermente arrotondati */
 }
 
 .card-name {
-    font-size: 0.875rem; /* Tailwind text-sm equivalent */
-    font-weight: 600; /* Tailwind font-semibold equivalent */
-    margin-bottom: 0.5rem; /* Tailwind mb-2 equivalent */
+    font-size: 0.875rem; /* Equivalente a text-sm di Tailwind */
+    font-weight: 600; /* Equivalente a font-semibold di Tailwind */
+    margin-bottom: 0.5rem; /* Equivalente a mb-2 di Tailwind */
     color: #666;
     text-align: center;
-    /* font-family: 'Papyrus', cursive; */ /* Papyrus is a system font, use a fallback or web font */
+    /* font-family: 'Papyrus', cursive; */ /* Papyrus è un font di sistema, usa un fallback o un web font */
 }
 
-.card-title {
-     font-size: 0.875rem; /* Tailwind text-sm equivalent */
-    font-weight: bold; /* Tailwind font-bold equivalent */
-    margin-bottom: 0.25rem; /* Tailwind mb-1 equivalent */
-    color: #333;
+/* Stile per il titolo sul retro della carta */
+.card-back .card-title {
+    font-size: 0.875rem; /* Equivalente a text-sm di Tailwind */
+    font-weight: bold; /* Equivalente a font-bold di Tailwind */
+    margin-bottom: 0.25rem; /* Equivalente a mb-1 di Tailwind */
     text-align: center;
     max-width: 100%;
-    /* font-family: 'Papyrus', cursive; */ /* Papyrus is a system font, use a fallback or web font */
+    /* font-family: 'Papyrus', cursive; */ /* Papyrus è un font di sistema, usa un fallback o un web font */
+
+    /* Rimosso: Stili per l'effetto arcobaleno CSS */
+    /* background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
+    /* -webkit-background-clip: text; */
+    /* background-clip: text; */
+    /* color: transparent; */
+    /* animation: rainbow 5s linear infinite; */
+    /* background-size: 200% auto; */
+
+    /* Imposta un colore iniziale (sarà sovrascritto dal JS) */
+    color: white; /* Colore di fallback */
 }
 
+/* Rimosso: Definizione dell'animazione arcobaleno CSS */
+/* @keyframes rainbow { ... } */
+
+
 .card-description {
-    font-size: 0.75rem; /* Tailwind text-xs equivalent */
-    line-height: 1rem; /* Tailwind leading-tight equivalent */
+    font-size: 0.75rem; /* Equivalente a text-xs di Tailwind */
+    line-height: 1rem; /* Equivalente a leading-tight di Tailwind */
     color: #666;
     text-align: justify;
     width: 100%;
-    /* font-family: 'Papyrus', cursive; */ /* Papyrus is a system font, use a fallback or web font */
+    /* font-family: 'Papyrus', cursive; */ /* Papyrus è un font di sistema, usa un fallback o un web font */
     font-weight: bold;
 }
 
 .scroll-wrapper {
-    flex-grow: 1; /* Allow content to take available space */
+    flex-grow: 1; /* Permetti al contenuto di occupare lo spazio disponibile */
     width: 100%;
-    overflow-y: auto; /* Enable vertical scrolling */
-    margin-top: 0.5rem; /* Tailwind mt-2 equivalent */
-    padding-right: 5px; /* Add some padding for the scrollbar */
+    overflow-y: auto; /* Abilita lo scrolling verticale */
+    margin-top: 0.5rem; /* Equivalente a mt-2 di Tailwind */
+    padding-right: 5px; /* Aggiungi un po' di padding per la scrollbar */
 }
 
-/* Scrollbar styling (optional, customize as needed) */
+/* Stile della scrollbar (opzionale, personalizza a piacere) */
 .scroll-wrapper::-webkit-scrollbar {
     width: 8px;
 }
@@ -115,7 +132,7 @@
 }
 
 
-/* Modal styles */
+/* Stili del modale */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -126,7 +143,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Above other content */
+    z-index: 1000; /* Sopra gli altri contenuti */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -139,72 +156,72 @@
 
 .modal-content {
     background-color: white;
-    padding: 1.5rem; /* Tailwind p-6 equivalent */
-    border-radius: 0.75rem; /* Tailwind rounded-xl equivalent */
-    width: 90%; /* Tailwind w-11/12 equivalent */
-    max-width: 400px; /* Max width for larger screens */
+    padding: 1.5rem; /* Equivalente a p-6 di Tailwind */
+    border-radius: 0.75rem; /* Equivalente a rounded-xl di Tailwind */
+    width: 90%; /* Equivalente a w-11/12 di Tailwind */
+    max-width: 400px; /* Larghezza massima per schermi più grandi */
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind shadow-md equivalent */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Equivalente a shadow-md di Tailwind */
 }
 
 .popup-subtitle {
-    font-size: 0.875rem; /* Tailwind text-sm equivalent */
+    font-size: 0.875rem; /* Equivalente a text-sm di Tailwind */
     color: #666;
-    margin-bottom: 0.25rem; /* Tailwind mb-1 equivalent */
+    margin-bottom: 0.25rem; /* Equivalente a mb-1 di Tailwind */
     /* font-family: 'Papyrus', cursive; */
 }
 
 .popup-title {
-    font-size: 1.25rem; /* Tailwind text-xl equivalent */
-    font-weight: bold; /* Tailwind font-bold equivalent */
+    font-size: 1.25rem; /* Equivalente a text-xl di Tailwind */
+    font-weight: bold; /* Equivalente a font-bold di Tailwind */
     color: #333;
-    margin-bottom: 0.75rem; /* Tailwind mb-3 equivalent */
+    margin-bottom: 0.75rem; /* Equivalente a mb-3 di Tailwind */
     text-align: center;
     /* font-family: 'Papyrus', cursive; */
 }
 
 .arcana-image {
-    width: 9rem; /* Tailwind w-36 equivalent */
-    height: 14rem; /* Tailwind h-56 equivalent */
+    width: 9rem; /* Equivalente a w-36 di Tailwind */
+    height: 14rem; /* Equivalente a h-56 di Tailwind */
     object-fit: contain;
-    margin-bottom: 0.5rem; /* Tailwind mb-2 equivalent */
+    margin-bottom: 0.5rem; /* Equivalente a mb-2 di Tailwind */
 }
 
 .arcana-description {
-    font-size: 0.875rem; /* Tailwind text-sm equivalent */
-    line-height: 1.25rem; /* Tailwind leading-relaxed equivalent */
+    font-size: 0.875rem; /* Equivalente a text-sm di Tailwind */
+    line-height: 1.25rem; /* Equivalente a leading-relaxed di Tailwind */
     color: #444;
     text-align: justify;
     /* font-family: 'Papyrus', cursive; */
 }
 
 .description-scroll {
-    max-height: 10rem; /* Max height for scroll */
+    max-height: 10rem; /* Altezza massima per lo scroll */
     width: 100%;
-    margin-bottom: 0.75rem; /* Tailwind mb-3 equivalent */
-    overflow-y: auto; /* Enable scroll */
+    margin-bottom: 0.75rem; /* Equivalente a mb-3 di Tailwind */
+    overflow-y: auto; /* Abilita lo scroll */
 }
 
 .close-button {
-    margin-top: 0.75rem; /* Tailwind mt-3 equivalent */
-    padding: 0.5rem 1rem; /* Tailwind py-2 px-4 equivalent */
+    margin-top: 0.75rem; /* Equivalente a mt-3 di Tailwind */
+    padding: 0.5rem 1rem; /* Equivalente a py-2 px-4 di Tailwind */
     background-color: #6e3b6e;
     color: white;
     font-weight: bold;
-    border-radius: 9999px; /* Tailwind rounded-full equivalent */
+    border-radius: 9999px; /* Equivalente a rounded-full di Tailwind */
     cursor: pointer;
     /* font-family: 'Papyrus', cursive; */
-    font-size: 1rem; /* Tailwind text-base equivalent */
+    font-size: 1rem; /* Equivalente a text-base di Tailwind */
 }
 
 .notification-dot {
     position: absolute;
-    top: 0.25rem; /* Tailwind top-1 equivalent */
-    right: 0.25rem; /* Tailwind right-1 equivalent */
-    width: 0.5rem; /* Tailwind w-2 equivalent */
-    height: 0.5rem; /* Tailwind h-2 equivalent */
-    border-radius: 9999px; /* Tailwind rounded-full equivalent */
+    top: 0.25rem; /* Equivalente a top-1 di Tailwind */
+    right: 0.25rem; /* Equivalente a right-1 di Tailwind */
+    width: 0.5rem; /* Equivalente a w-2 di Tailwind */
+    height: 0.5rem; /* Equivalente a h-2 di Tailwind */
+    border-radius: 9999px; /* Equivalente a rounded-full di Tailwind */
     background-color: red;
 }
