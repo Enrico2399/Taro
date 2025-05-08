@@ -41,6 +41,9 @@
     background-position: center; /* Centra l'immagine di sfondo */
     /* Aggiungi un po' di padding per evitare che il testo tocchi i bordi */
     padding: 1rem;
+
+    /* Contorno interno dorato */
+    box-shadow: inset 0 0 0 3px gold; /* Inset shadow per un bordo interno dorato di 3px */
 }
 
 /* Classe aggiunta quando la carta viene ruotata */
@@ -69,7 +72,7 @@
     /* font-family: 'Papyrus', cursive; */ /* Papyrus è un font di sistema, usa un fallback o un web font */
 }
 
-/* Stile per il titolo sul retro della carta */
+/* Stile per il titolo sul retro della carta con animazione arcobaleno */
 .card-back .card-title {
     font-size: 0.875rem; /* Equivalente a text-sm di Tailwind */
     font-weight: bold; /* Equivalente a font-bold di Tailwind */
@@ -78,7 +81,7 @@
     max-width: 100%;
     /* font-family: 'Papyrus', cursive; */ /* Papyrus è un font di sistema, usa un fallback o un web font */
 
-    /* Rimosso: Stili per l'effetto arcobaleno CSS */
+    /* Stili per l'effetto arcobaleno (gestito dal JS) */
     /* background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
     /* -webkit-background-clip: text; */
     /* background-clip: text; */
@@ -224,4 +227,65 @@
     height: 0.5rem; /* Equivalente a h-2 di Tailwind */
     border-radius: 9999px; /* Equivalente a rounded-full di Tailwind */
     background-color: red;
+}
+
+/* --- Stili per il pulsante circolare --- */
+#arcanaButton {
+    position: absolute;
+    top: 1rem; /* Equivalente a top-4 di Tailwind */
+    right: 1rem; /* Equivalente a right-4 di Tailwind */
+    width: calc(2.5rem * 1.2); /* Aumenta la larghezza del 20% */
+    height: calc(2.5rem * 1.2); /* Aumenta l'altezza del 20% */
+    border-radius: 9999px; /* Equivalente a rounded-full di Tailwind */
+    /* Rimosso: Sfondo blu statico */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra */
+    cursor: pointer;
+    z-index: 50; /* Equivalente a z-50 di Tailwind */
+    overflow: visible; /* Permetti al pseudo-elemento di essere visibile fuori dal pulsante */
+}
+
+#arcanaButton img {
+    width: 120%; /* Ingrandisci l'immagine interna del 20% */
+    height: 120%; /* Ingrandisci l'immagine interna del 20% */
+    object-fit: contain;
+    z-index: 1; /* Assicura che l'immagine sia sopra il glow */
+}
+
+/* --- Stili per l'effetto lampeggiante attorno al pulsante --- */
+/* Usiamo un pseudo-elemento ::after per l'effetto */
+#arcanaButton::after {
+    content: '';
+    position: absolute;
+    /* Regola le dimensioni per estendersi attorno al pulsante */
+    top: -5px; /* Estendi leggermente fuori dal pulsante */
+    left: -5px; /* Estendi leggermente fuori dal pulsante */
+    right: -5px; /* Estendi leggermente fuori dal pulsante */
+    bottom: -5px; /* Estendi leggermente fuori dal pulsante */
+    border-radius: 9999px; /* Forma circolare */
+    border: 3px solid transparent; /* Bordo iniziale trasparente */
+    animation: pulse-cylinder 1.5s infinite ease-in-out alternate; /* Applica l'animazione */
+    z-index: -1; /* Posiziona dietro l'immagine del pulsante */
+}
+
+/* Definizione dell'animazione del cilindro lampeggiante */
+@keyframes pulse-cylinder {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+        border-color: rgba(0, 191, 255, 0.7); /* Azzurro semi-trasparente */
+    }
+    50% {
+         transform: scale(1.1); /* Ingandisci leggermente */
+         opacity: 1;
+         border-color: rgba(0, 255, 255, 1); /* Azzurro più chiaro opaco */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+        border-color: rgba(0, 191, 255, 0.7); /* Torna all'azzurro originale */
+    }
 }
