@@ -194,6 +194,7 @@ const arcanaModal = document.getElementById('arcanaModal');
 const modalArcanaName = document.getElementById('modalArcanaName');
 const modalArcanaImage = document.getElementById('modalArcanaImage');
 const modalArcanaDescription = document.getElementById('modalArcanaDescription');
+// Ottieni l'elemento audio
 const flipSound = document.getElementById('flipSound');
 
 
@@ -218,9 +219,13 @@ const getArcanaOfTheDay = () => {
 
 // Riproduci il suono del flip
 const playFlipSound = () => {
+    // Controlla se l'elemento audio è stato trovato e se è pronto per essere riprodotto
     if (flipSound) {
-        flipSound.currentTime = 0; // Riporta all'inizio
-        flipSound.play().catch(e => console.error("Error playing sound:", e)); // Gestisci potenziali errori
+        flipSound.currentTime = 0; // Riporta all'inizio per poterlo riprodurre più volte velocemente
+        // Utilizza il metodo play() che restituisce una Promise per gestire potenziali errori
+        flipSound.play().catch(e => console.error("Error playing sound:", e));
+    } else {
+        console.warn("Audio element with ID 'flipSound' not found.");
     }
 };
 
@@ -273,7 +278,8 @@ const createCardElement = (cardData, index) => {
     const cardTitle = document.createElement('p');
     cardTitle.classList.add('card-title');
     cardTitle.textContent = cardTitles[index];
-    cardTitle.style.color = 'white'; // Assicurati che il titolo sia visibile su sfondo scuro
+    // Rimosso: Impostazione del colore iniziale via CSS, ora gestito dal JS
+    // cardTitle.style.color = 'white';
 
     cardBack.appendChild(cardTitle);
 
@@ -283,15 +289,65 @@ const createCardElement = (cardData, index) => {
     // Aggiungi funzionalità di flip
     cardContainer.addEventListener('click', () => {
         cardContainer.classList.toggle('flipped');
-        playFlipSound();
+        playFlipSound(); // Chiama la funzione per riprodurre il suono
     });
 
     return cardContainer;
 };
 
+// --- Dynamic Text Color (JavaScript) ---
+
+const rainbowColors = [
+    'rgb(255, 0, 0)',   // Red
+    'rgb(255, 165, 0)', // Orange
+    'rgb(255, 255, 0)', // Yellow
+    'rgb(0, 128, 0)',   // Green
+    'rgb(0, 0, 255)',   // Blue
+    'rgb(75, 0, 130)',  // Indigo
+    'rgb(148, 0, 211)'  // Violet
+];
+let colorIndex = 0; // Per tenere traccia del colore corrente
+
+const updateTitleColors = () => {
+    // Seleziona solo i titoli delle carte visibili (quelle generate)
+    const titleElements = cardsContainer.querySelectorAll('.card-back .card-title');
+    titleElements.forEach(titleElement => {
+        // Applica il colore corrente
+        titleElement.style.color = rainbowColors[colorIndex];
+    });
+
+    // Passa al colore successivo
+    colorIndex = (colorIndex + 1) % rainbowColors.length;
+};
+
+let colorInterval; // Per memorizzare l'ID dell'intervallo
+
+// Funzione per avviare l'animazione del colore
+const startColorAnimation = () => {
+    // Pulisci qualsiasi intervallo esistente
+    if (colorInterval) {
+        clearInterval(colorInterval);
+    }
+    // Avvia un nuovo intervallo per aggiornare i colori ogni 200ms
+    colorInterval = setInterval(updateTitleColors, 200); // Cambia colore ogni 200ms
+};
+
+// Funzione per fermare l'animazione del colore (opzionale)
+const stopColorAnimation = () => {
+    if (colorInterval) {
+        clearInterval(colorInterval);
+        colorInterval = null;
+    }
+};
+
+
 // Funzione per generare e visualizzare 4 carte casuali
 const generateCards = () => {
-     // Non è più necessario controllare cards.length qui, i dati sono sempre disponibili
+     if (cards.length === 0) {
+        console.warn("Card data not loaded, cannot generate cards.");
+        // Potresti voler mostrare un messaggio all'utente qui
+        return; // Impedisci la generazione se i dati mancano
+    }
     // Pulisci le carte precedenti
     cardsContainer.innerHTML = '';
 
@@ -303,6 +359,9 @@ const generateCards = () => {
         const cardElement = createCardElement(card, index);
         cardsContainer.appendChild(cardElement);
     });
+
+    // Avvia l'animazione del colore dopo che le carte sono state aggiunte al DOM
+    startColorAnimation();
 };
 
 // --- Logica Modale ---
@@ -360,10 +419,7 @@ arcanaModal.addEventListener('click', (event) => {
 
 // --- Setup Iniziale ---
 
-// Rimosso: window.onload non è più necessario per caricare i dati
-
-// Chiama checkNotificationDot e generateCards direttamente
-// Esegui checkNotificationDot all'avvio
+// Chiama checkNotificationDot all'avvio
 checkNotificationDot();
 
 // generateCards() non viene chiamato all'avvio per l'apertura statica
